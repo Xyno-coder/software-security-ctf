@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ctf-1-web-sqli
+    ports:
+      - "80:80"
+    environment:
+      - APACHE_LOG_DIR=/var/log/apache2
+    restart: unless-stopped

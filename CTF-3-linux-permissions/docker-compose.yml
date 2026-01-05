@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  ctf-linux-permissions:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ctf3-linux-permissions
+    stdin_open: true
+    tty: true
+    networks:
+      - ctf-network
+
+networks:
+  ctf-network:
+    driver: bridge

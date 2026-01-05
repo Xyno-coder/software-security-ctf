@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ctf-linux-suid:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ctf4-linux-suid
+    stdin_open: true
+    tty: true
+    security_opt:
+      - no-new-privileges=false  
+    networks:
+      - ctf-network
+
+networks:
+  ctf-network:
+    driver: bridge

@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./back
+    container_name: ctf-backend
+    ports:
+      - "8080:80"
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: ctf-frontend
+    ports:
+      - "5174:80"  
+    depends_on:
+      - backend
+    restart: unless-stopped

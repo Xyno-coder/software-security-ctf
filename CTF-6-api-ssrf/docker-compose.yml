@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # API Gateway - Service exposé publiquement
+  api-gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: ctf5-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - INTERNAL_SERVICE_URL=http://internal-flag:8080
+    networks:
+      - ctf-network
+    depends_on:
+      - internal-flag
+
+  # Service interne - NON exposé, contient le flag
+  internal-flag:
+    build:
+      context: ./internal-flag
+      dockerfile: Dockerfile
+    container_name: ctf5-internal-flag
+    networks:
+      - ctf-network
+    environment:
+      - FLAG=CTF{htrq56FZAQ}
+
+networks:
+  ctf-network:
+    driver: bridge

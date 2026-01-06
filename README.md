@@ -9,9 +9,9 @@ Bienvenue dans ce projet de Capture The Flag (CTF) éducatif ! Ce projet contien
 | 1 | Web SQL Injection | Web Security | 🟢 **Facile** | Web fuzzing et injections SQL |
 | 2 | JWT Leak | Web Security | 🟡 **Moyen** | Fuite de secrets JWT et path traversal |
 | 3 | Linux Permissions | Linux Security | 🟢 **Facile** | Exploitation des permissions Linux |
-| 4 | Linux SUID | Linux Security | 🟡 **Moyen** | PATH hijacking et binaires SUID |
+| 4 | Linux SUID | Linux Security | � **Hardcore** | PATH hijacking et binaires SUID |
 | 5 | PHP Object Injection | Web Security | 🔴 **Hardcore** | Désérialisation PHP et RCE |
-| 6 | API SSRF | Web Security | 🔴 **Hardcore** | Server-Side Request Forgery dans microservices |
+| 6 | API SSRF | Web Security | 🟡 **Moyen** | Server-Side Request Forgery dans microservices |
 
 ---
 
@@ -102,6 +102,8 @@ docker run -it ctf-linux-permissions
 
 **Difficulté:** 🟡 Moyen (2/3)
 
+**Difficulté:** 🟡 Moyen (2/3)
+
 **Description:**
 Ce challenge combine plusieurs vulnérabilités Web: fuites de secrets, path traversal, et manipulation de JWT (JSON Web Tokens). L'application expose accidentellement ses secrets de configuration et les JWT peuvent être forgés.
 
@@ -149,12 +151,14 @@ docker-compose up -d --build
 
 ---
 
+## 🔴 NIVEAU HARDCORE
+
 ### CTF-4: Linux SUID & PATH Hijacking
 
-**Difficulté:** 🟡 Moyen (2/3)
+**Difficulté:** 🔴 Hardcore (3/3)
 
 **Description:**
-Ce challenge enseigne les techniques d'élévation de privilèges via l'exploitation de binaires SUID et le PATH hijacking. Le but est de lire `/root/flag.txt` en exploitant un binaire vulnérable.
+Ce challenge avancé enseigne les techniques d'élévation de privilèges via l'exploitation de binaires SUID et le PATH hijacking. Le but est de lire `/root/flag.txt` en exploitant un binaire vulnérable.
 
 **Flag:** `CTF{path_hijacking_and_permissions_master}`
 
@@ -214,10 +218,6 @@ export PATH=/tmp/hijack:$PATH
 2. Analyser avec `strings` pour trouver les appels `system()`
 3. Créer des commandes malveillantes sans chemin absolu
 4. Manipuler la variable PATH
-
----
-
-## 🔴 NIVEAU HARDCORE
 
 ### CTF-5: PHP Object Injection
 
@@ -298,9 +298,11 @@ Créer un objet sérialisé qui exploite la chaîne de gadgets pour exécuter du
 
 ---
 
+## 🟡 NIVEAU MOYEN
+
 ### CTF-6: API SSRF & Microservices
 
-**Difficulté:** 🔴 Hardcore (3/3)
+**Difficulté:** 🟡 Moyen (2/3)
 
 **Description:**
 Ce challenge complexe teste l'exploitation de vulnérabilités SSRF (Server-Side Request Forgery) dans une architecture microservices. Le flag est stocké dans un service interne non exposé directement, accessible uniquement via SSRF.
@@ -408,11 +410,11 @@ docker-compose down
 
 2. **Progresser aux challenges MOYENS:**
    - CTF-2: JWT Leak
-   - CTF-4: Linux SUID & PATH Hijacking
+   - CTF-6: API SSRF & Microservices
 
 3. **Maîtriser les challenges HARDCORE:**
+   - CTF-4: Linux SUID & PATH Hijacking
    - CTF-5: PHP Object Injection
-   - CTF-6: API SSRF & Microservices
 
 ---
 

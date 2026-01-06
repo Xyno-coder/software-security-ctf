@@ -1,28 +1,28 @@
 # CTF Project - Capture The Flag Challenges
 
-Bienvenue dans ce projet de Capture The Flag (CTF) éducatif ! Ce projet contient 6 challenges de cybersécurité progressifs testant différentes vulnérabilités et techniques d'exploitation.
+Welcome to this educational Capture The Flag (CTF) project! This project contains 6 progressive cybersecurity challenges testing different vulnerabilities and exploitation techniques.
 
-## 📊 Vue d'ensemble des Challenges
+## 📊 Challenges Overview
 
-| # | Nom | Type | Difficulté | Description |
-|---|-----|------|-----------|-------------|
-| 1 | Web SQL Injection | Web Security | 🟢 **Facile** | Web fuzzing et injections SQL |
-| 2 | JWT Leak | Web Security | 🟡 **Moyen** | Fuite de secrets JWT et path traversal |
-| 3 | Linux Permissions | Linux Security | 🟢 **Facile** | Exploitation des permissions Linux |
-| 4 | Linux SUID | Linux Security | 🔴 **Hardcore** | PATH hijacking et binaires SUID |
-| 5 | PHP Object Injection | Web Security | 🔴 **Hardcore** | Désérialisation PHP et RCE |
-| 6 | API SSRF | Web Security | 🟡 **Moyen** | Server-Side Request Forgery dans microservices |
+| # | Name | Type | Difficulty | Description |
+|---|------|------|-----------|-------------|
+| 1 | Web SQL Injection | Web Security | 🟢 **Easy** | Web fuzzing and SQL injections |
+| 2 | JWT Leak | Web Security | 🟡 **Medium** | JWT secret leaks and path traversal |
+| 3 | Linux Permissions | Linux Security | 🟢 **Easy** | Linux permissions exploitation |
+| 4 | Linux SUID | Linux Security | 🔴 **Hardcore** | PATH hijacking and SUID binaries |
+| 5 | PHP Object Injection | Web Security | 🔴 **Hardcore** | PHP deserialization and RCE |
+| 6 | API SSRF | Web Security | 🟡 **Medium** | Server-Side Request Forgery in microservices |
 
 ---
 
-## 🟢 NIVEAU FACILE
+## 🟢 EASY LEVEL
 
 ### CTF-1: Web SQL Injection
 
-**Difficulté:** 🟢 Facile (1/3)
+**Difficulty:** 🟢 Easy (1/3)
 
 **Description:**
-Ce premier challenge introduit les concepts fondamentaux de Web Fuzzing et d'injections SQL. L'application Web contient des formulaires vulnérables exploitables via des techniques d'injection SQL classiques.
+This first challenge introduces the fundamental concepts of Web Fuzzing and SQL injections. The web application contains vulnerable forms exploitable through classic SQL injection techniques.
 
 **Technologies:**
 - PHP
@@ -30,80 +30,80 @@ Ce premier challenge introduit les concepts fondamentaux de Web Fuzzing et d'inj
 - Apache
 - Docker
 
-**Concepts testés:**
-- Web fuzzing et reconnaissance
-- Injections SQL basiques
-- Manipulation de requêtes SQL
-- Extraction d'informations de base de données
+**Concepts Tested:**
+- Web fuzzing and reconnaissance
+- Basic SQL injections
+- SQL query manipulation
+- Database information extraction
 
-**Lancement:**
+**Launch:**
 ```bash
 cd CTF/CTF-1-web-sqli-ctf
 docker build -t ctf-web-sqli .
 docker run --rm -p 8080:80 ctf-web-sqli
 ```
 
-**Accès:**
+**Access:**
 - URL: `http://localhost:8080`
 
-**Fichiers importants:**
-- `create_db.php`: Création et initialisation de la base de données
-- `index.php`: Page d'accueil vulnérable
-- `administrator.php`: Panel admin vulnérable
-- `order.php`: Système de commandes vulnérable
+**Important Files:**
+- `create_db.php`: Database creation and initialization
+- `index.php`: Vulnerable homepage
+- `administrator.php`: Vulnerable admin panel
+- `order.php`: Vulnerable order system
 
 ---
 
 ### CTF-3: Linux Permissions
 
-**Difficulté:** 🟢 Facile (1/3)
+**Difficulty:** 🟢 Easy (1/3)
 
 **Description:**
-Ce challenge enseigne les bases des permissions Linux. Le but est de trouver un flag caché dans un fichier `.secret.txt` en explorant intelligemment le système de fichiers du conteneur Docker.
+This challenge teaches the basics of Linux permissions. The goal is to find a hidden flag in a `.secret.txt` file by intelligently exploring the Docker container's file system.
 
 **Technologies:**
 - Linux (Ubuntu)
 - Bash scripting
 - Docker
 
-**Concepts testés:**
-- Permissions Linux (rwx)
-- Navigation système
-- Lecture de fichiers avec restrictions
-- Énumération basique du système
+**Concepts Tested:**
+- Linux permissions (rwx)
+- System navigation
+- Restricted file access
+- Basic system enumeration
 
-**Lancement:**
+**Launch:**
 ```bash
 cd CTF/CTF-3-linux-permissions
 docker-compose up -d --build
 docker exec -it ctf3-linux-permissions /bin/bash
 ```
 
-**Ou directement:**
+**Or directly:**
 ```bash
 docker build -t ctf-linux-permissions .
 docker run -it ctf-linux-permissions
 ```
 
-**Objectif:**
-- Lire le fichier `.secret.txt` contenant le flag
-- L'accès direct est restreint, il faut contourner les permissions
+**Objective:**
+- Read the `.secret.txt` file containing the flag
+- Direct access is restricted, you must bypass permissions
 
-**Indices:**
-- Un fichier `helper.py` dans `/app` donne des indices progressifs
-- Examiner les permissions avec `ls -la`
-- Chercher des chemins alternatifs vers le flag
+**Hints:**
+- A `helper.py` file in `/app` provides progressive hints
+- Examine permissions with `ls -la`
+- Look for alternative paths to the flag
 
 ---
 
-## 🟡 NIVEAU MOYEN
+## 🟡 MEDIUM LEVEL
 
 ### CTF-2: JWT Leak
 
-**Difficulté:** 🟡 Moyen (2/3)
+**Difficulty:** 🟡 Medium (2/3)
 
 **Description:**
-Ce challenge combine plusieurs vulnérabilités Web: fuites de secrets, path traversal, et manipulation de JWT (JSON Web Tokens). L'application expose accidentellement ses secrets de configuration et les JWT peuvent être forgés.
+This challenge combines multiple web vulnerabilities: secret leaks, path traversal, and JWT (JSON Web Tokens) manipulation. The application accidentally exposes its configuration secrets and JWTs can be forged.
 
 **Technologies:**
 - Python (Flask)
@@ -111,11 +111,11 @@ Ce challenge combine plusieurs vulnérabilités Web: fuites de secrets, path tra
 - JWT (JSON Web Tokens)
 - Docker Compose
 
-**Concepts testés:**
-- Reconnaissance de l'API
+**Concepts Tested:**
+- API reconnaissance
 - Path traversal/LFI (Local File Inclusion)
-- Fuites de fichiers sensibles (.env)
-- Manipulation et forgerie de JWT
+- Sensitive file leaks (.env)
+- JWT manipulation and forgery
 - Authentication bypass
 
 **Architecture:**
@@ -124,148 +124,148 @@ Backend: Flask API (Port 8080)
 Frontend: Vite + React (Port 5174)
 ```
 
-**Lancement:**
+**Launch:**
 ```bash
 cd CTF/CTF-2-jwt-leak
 docker-compose up -d --build
 ```
 
-**Accès:**
+**Access:**
 - Frontend: `http://localhost:5174`
 - Backend API: `http://localhost:8080`
 
-**Objectif:**
-- Récupérer le flag en obtenant un JWT valide avec le rôle `admin`
-- Exploiter les vulnérabilités pour accéder aux secrets de configuration
+**Objective:**
+- Retrieve the flag by obtaining a valid JWT with `admin` role
+- Exploit vulnerabilities to access configuration secrets
 
-**Vulnérabilités clés:**
-1. **Path Traversal**: L'endpoint `/api/download?file=` n'est pas sécurisé
-2. **Fuite d'env**: Le fichier `.env` contient la clé secrète JWT
-3. **JWT Forgery**: Une fois la clé secrète obtenue, créer un token admin
+**Key Vulnerabilities:**
+1. **Path Traversal**: The `/api/download?file=` endpoint is not secure
+2. **Env Leak**: The `.env` file contains the JWT secret key
+3. **JWT Forgery**: Once the secret is obtained, create an admin token
 
-**Endpoints utiles:**
-- `GET /api/download?file=README.txt` - Télécharger des fichiers
-- `GET /api/admin` - Endpoint protégé (nécessite JWT admin)
+**Useful Endpoints:**
+- `GET /api/download?file=README.txt` - Download files
+- `GET /api/admin` - Protected endpoint (requires admin JWT)
 
 ---
 
 ### CTF-6: API SSRF & Microservices
 
-**Difficulté:** 🟡 Moyen (2/3)
+**Difficulty:** 🟡 Medium (2/3)
 
 **Description:**
-Ce challenge teste l'exploitation de vulnérabilités SSRF (Server-Side Request Forgery) dans une architecture microservices. Le flag est stocké dans un service interne non exposé directement, accessible uniquement via SSRF.
+This challenge tests SSRF (Server-Side Request Forgery) vulnerability exploitation in a microservices architecture. The flag is stored in an internal service not directly exposed, accessible only via SSRF.
 
 **Technologies:**
 - Python (Flask)
 - Docker Compose
-- Architecture microservices
+- Microservices architecture
 - Docker networking
 
 **Architecture:**
 ```
 Gateway (Port 8080)
-  └─> Internal-Flag Service (Port 8001 - non exposé publiquement)
+  └─> Internal-Flag Service (Port 8001 - not publicly exposed)
 ```
 
-**Concepts testés:**
+**Concepts Tested:**
 - Server-Side Request Forgery (SSRF)
-- Architecture microservices
-- Reconnaissance d'API
-- Contournement de restrictions d'accès
-- Exploitation via requêtes internes
+- Microservices architecture
+- API reconnaissance
+- Access restriction bypass
+- Exploitation via internal requests
 
-**Lancement:**
+**Launch:**
 ```bash
 cd CTF/CTF-6-api-ssrf
 docker-compose up -d --build
 ```
 
-**Accès:**
+**Access:**
 - Gateway: `http://localhost:8080`
-- Internal API: `http://localhost:8001` (seulement depuis le conteneur)
+- Internal API: `http://localhost:8001` (container access only)
 
-**Objectif:**
-Récupérer le flag stocké dans le service interne en exploitant une vulnérabilité SSRF dans la gateway.
+**Objective:**
+Retrieve the flag stored in the internal service by exploiting an SSRF vulnerability in the gateway.
 
-**Technique d'exploitation - SSRF:**
+**SSRF Exploitation Technique:**
 
-L'idée est d'utiliser le service gateway pour faire des requêtes vers le service interne:
+The idea is to use the gateway service to make requests to the internal service:
 
 ```bash
-# Vérifier ce que la gateway expose
+# Check what the gateway exposes
 curl http://localhost:8080
 
-# Tenter une SSRF vers le service interne
+# Attempt SSRF to internal service
 curl 'http://localhost:8080/proxy?url=http://internal-flag:8001/flag'
 ```
 
-**Points clés:**
-1. Le service interne n'est pas accessible directement depuis votre machine
-2. Le service gateway a accès au réseau interne Docker
-3. Une vulnérabilité SSRF dans la gateway permet de lui faire faire des requêtes
-4. Par défaut, les conteneurs Docker peuvent se résoudre par nom: `internal-flag:8001`
+**Key Points:**
+1. The internal service is not directly accessible from your machine
+2. The gateway service has access to the internal Docker network
+3. An SSRF vulnerability in the gateway allows it to make internal requests
+4. By default, Docker containers can resolve by name: `internal-flag:8001`
 
-**Outils utiles:**
-- `curl` pour tester les requêtes
-- `docker-compose logs` pour déboguer
-- `docker exec` pour inspecter les conteneurs
+**Useful Tools:**
+- `curl` to test requests
+- `docker-compose logs` for debugging
+- `docker exec` to inspect containers
 
 ---
 
-## 🔴 NIVEAU HARDCORE
+## 🔴 HARDCORE LEVEL
 
 ### CTF-4: Linux SUID & PATH Hijacking
 
-**Difficulté:** 🔴 Hardcore (3/3)
+**Difficulty:** 🔴 Hardcore (3/3)
 
 **Description:**
-Ce challenge avancé enseigne les techniques d'élévation de privilèges via l'exploitation de binaires SUID et le PATH hijacking. Le but est de lire `/root/flag.txt` en exploitant un binaire vulnérable.
+This advanced challenge teaches privilege escalation techniques through SUID binary exploitation and PATH hijacking. The goal is to read `/root/flag.txt` by exploiting a vulnerable binary.
 
 **Flag:** `CTF{path_hijacking_and_permissions_master}`
 
 **Technologies:**
 - Linux (Ubuntu)
-- C (binaires compilés)
+- C (compiled binaries)
 - Bash scripting
 - Docker
 
-**Concepts testés:**
-- Bit SUID et escalade de privilèges
-- Variable PATH et ordre de recherche
-- Analyse de binaires (strings, ltrace, strace)
-- Création de faux binaires
+**Concepts Tested:**
+- SUID bit and privilege escalation
+- PATH environment variable and search order
+- Binary analysis (strings, ltrace, strace)
+- Malicious binary creation
 - PATH injection attacks
 
-**Lancement:**
+**Launch:**
 ```bash
 cd CTF/CTF-4-linux-suid
 docker-compose up -d --build
 docker exec -it ctf4-linux-suid /bin/bash
 ```
 
-**Qu'est-ce qu'un binaire SUID ?**
+**What is a SUID Binary?**
 
-SUID (Set User ID) permet à un binaire de s'exécuter avec les privilèges de son propriétaire:
+SUID (Set User ID) allows a binary to execute with its owner's privileges:
 ```bash
 -rwsr-xr-x 1 root ctfgroup 12345 check_system
 ```
-- Le `s` dans `rws` indique le bit SUID
-- Quand exécuté, le binaire tourne avec les privilèges de `root`
+- The `s` in `rws` indicates SUID is set
+- When executed, the binary runs with `root` privileges
 
-**Technique d'exploitation - PATH Hijacking:**
+**PATH Hijacking Exploitation Technique:**
 
-1. **Énumération** - Trouver les binaires SUID:
+1. **Enumeration** - Find SUID binaries:
 ```bash
 find / -perm -4000 2>/dev/null
 ```
 
-2. **Analyse** - Voir quelles commandes le binaire appelle:
+2. **Analysis** - See what commands the binary calls:
 ```bash
 strings /usr/local/bin/check_system
 ```
 
-3. **Exploitation** - Créer un faux binaire:
+3. **Exploitation** - Create a malicious binary:
 ```bash
 mkdir -p /tmp/hijack
 echo '#!/bin/bash' > /tmp/hijack/whoami
@@ -275,18 +275,18 @@ export PATH=/tmp/hijack:$PATH
 /usr/local/bin/check_system
 ```
 
-**Indices progressifs:**
-1. Chercher les binaires SUID dans `/usr/local/bin/`
-2. Analyser avec `strings` pour trouver les appels `system()`
-3. Créer des commandes malveillantes sans chemin absolu
-4. Manipuler la variable PATH
+**Progressive Hints:**
+1. Look for SUID binaries in `/usr/local/bin/`
+2. Analyze with `strings` to find `system()` calls
+3. Create malicious commands without absolute paths
+4. Manipulate the PATH variable
 
 ### CTF-5: PHP Object Injection
 
-**Difficulté:** 🔴 Hardcore (3/3)
+**Difficulty:** 🔴 Hardcore (3/3)
 
 **Description:**
-Ce challenge avancé teste la désérialisation PHP non sécurisée. L'application expose involontairement son code source via LFI, révélant une vulnérabilité de désérialisation permettant une RCE (Remote Code Execution) complète.
+This advanced challenge tests insecure PHP object deserialization. The application inadvertently exposes its source code via LFI, revealing a deserialization vulnerability allowing complete RCE (Remote Code Execution).
 
 **Technologies:**
 - PHP 8.1
@@ -294,46 +294,46 @@ Ce challenge avancé teste la désérialisation PHP non sécurisée. L'applicati
 - Docker
 
 **Architecture:**
-- Web service: Apache + PHP 8.1 avec sessions en Base64
-- Flag stocké dans `/flag.txt` (accessible après RCE)
+- Web service: Apache + PHP 8.1 with Base64-encoded sessions
+- Flag stored in `/flag.txt` (accessible after RCE)
 
-**Concepts testés:**
-- Local File Inclusion (LFI) - Découverte de vulnérabilités
-- Désérialisation PHP non sécurisée
+**Concepts Tested:**
+- Local File Inclusion (LFI) - Vulnerability discovery
+- Insecure PHP deserialization
 - Gadget chains
 - Remote Code Execution (RCE)
-- Manipulation de cookies encodés
+- Encoded cookie manipulation
 
-**Lancement:**
+**Launch:**
 ```bash
 cd CTF/CTF-5-php-object-injection
 docker-compose up -d --build
-# Ou directement
+# Or directly
 docker build -t ctf-php-injection .
 docker run -p 8005:80 ctf-php-injection
 ```
 
-**Accès:**
+**Access:**
 - URL: `http://localhost:8005`
 
-**Étapes d'exploitation:**
+**Exploitation Steps:**
 
-**1️⃣ Découverte via LFI**
-L'application expose un paramètre `?source=` qui retourne le code en Base64:
+**1️⃣ LFI Discovery**
+The application exposes a `?source=` parameter that returns code in Base64:
 ```bash
 curl 'http://localhost:8005/index.php?source=classes'
 curl 'http://localhost:8005/index.php?source=index'
 ```
 
-**2️⃣ Analyse du code**
-Le fichier `index.php` utilise `unserialize()` sans validation:
+**2️⃣ Code Analysis**
+The `index.php` file uses `unserialize()` without validation:
 ```php
 $decoded_data = base64_decode($_COOKIE['session_data'], true);
-$session = unserialize($decoded_data);  // ⚠️ Vulnérable !
+$session = unserialize($decoded_data);  // ⚠️ Vulnerable!
 ```
 
-**3️⃣ Identification de la Gadget Chain**
-La classe `FileLogger` contient `__destruct()` permettant l'écriture de fichiers:
+**3️⃣ Gadget Chain Identification**
+The `FileLogger` class contains `__destruct()` allowing file writing:
 ```php
 class FileLogger {
     public $logFile;
@@ -345,35 +345,35 @@ class FileLogger {
 }
 ```
 
-**4️⃣ Construction de la Payload**
-Créer un objet sérialisé qui exploite la chaîne de gadgets pour exécuter du code.
+**4️⃣ Payload Construction**
+Create a serialized object that exploits the gadget chain to execute code.
 
-**Fichiers importants:**
-- `index.php`: Application principale avec LFI intentionnelle
-- `classes.php`: Définition des classes vulnérables
-- `shell.php`: Webshell (à créer via RCE)
+**Important Files:**
+- `index.php`: Main application with intentional LFI
+- `classes.php`: Definition of vulnerable classes
+- `shell.php`: Webshell (to create via RCE)
 
-**Documentation supplémentaire:**
-- `EXPLOIT_GUIDE.md`: Guide détaillé d'exploitation
-- `WALKTHROUGH.md`: Walkthrough complet
-- `SUMMARY.md`: Résumé des concepts
+**Additional Documentation:**
+- `EXPLOIT_GUIDE.md`: Detailed exploitation guide
+- `WALKTHROUGH.md`: Complete walkthrough
+- `SUMMARY.md`: Concept summary
 
 ---
 
-## 🛠️ Prérequis
+## 🛠️ Requirements
 
-Tous les challenges nécessitent:
+All challenges require:
 
 - **Docker** (version 20.10+)
 - **Docker Compose** (version 1.29+)
-- **Tools optionnels**:
-  - `curl` ou `Postman` pour tester les APIs
-  - `strings` et `ltrace` pour analyser les binaires
-  - Éditeur texte ou IDE
+- **Optional tools**:
+  - `curl` or `Postman` for testing APIs
+  - `strings` and `ltrace` for binary analysis
+  - Text editor or IDE
 
 **Installation:**
 ```bash
-# macOS avec Homebrew
+# macOS with Homebrew
 brew install docker-compose
 
 # Linux (Ubuntu/Debian)
@@ -385,36 +385,36 @@ sudo apt-get install docker.io docker-compose
 ## 🚀 Quick Start
 
 ```bash
-# Cloner le projet
+# Clone the project
 cd /path/to/CTF-Project-Software-security
 
-# Lancer un challenge spécifique
+# Launch a specific challenge
 cd CTF/CTF-1-web-sqli-ctf
 docker-compose up -d --build
 
-# Arrêter les services
+# Stop services
 docker-compose down
 ```
 
 ---
 
-## 📚 Progression recommandée
+## 📚 Recommended Progression
 
-1. **Commencer par les challenges FACILES:**
+1. **Start with EASY challenges:**
    - CTF-1: Web SQL Injection
    - CTF-3: Linux Permissions
 
-2. **Progresser aux challenges MOYENS:**
+2. **Progress to MEDIUM challenges:**
    - CTF-2: JWT Leak
    - CTF-6: API SSRF & Microservices
 
-3. **Maîtriser les challenges HARDCORE:**
+3. **Master HARDCORE challenges:**
    - CTF-4: Linux SUID & PATH Hijacking
    - CTF-5: PHP Object Injection
 
 ---
 
-## 🎓 Concepts clés par domaine
+## 🎓 Key Concepts by Domain
 
 ### Web Security
 - SQL Injection (SQLi)
@@ -444,49 +444,52 @@ docker-compose down
 
 ## 🐛 Troubleshooting
 
-### Le port est déjà utilisé
+### Port Already in Use
 ```bash
-# Trouver et arrêter le service utilisant le port
+# Find and stop the service using the port
 lsof -i :8080
 kill -9 <PID>
 
-# Ou utiliser un port différent
+# Or use a different port
 docker run -p 9090:80 ctf-web-sqli
 ```
 
-### Erreurs Docker
+### Docker Errors
 ```bash
-# Forcer la reconstruction
+# Force rebuild
 docker-compose up -d --build --force-recreate
 
-# Voir les logs
+# View logs
 docker-compose logs -f
 
-# Nettoyer complètement
+# Complete cleanup
 docker-compose down -v
 docker system prune -a
 ```
 
-### Problèmes de connexion
+### Connection Issues
 ```bash
-# Vérifier les services actifs
+# Check active services
 docker ps
 
-# Inspecter la configuration réseau
+# Inspect network configuration
 docker network ls
 docker network inspect ctf_default
 ```
 
 ---
 
-## 📝 Notes importantes
+## 📝 Important Notes
 
-- 📖 Consulter les waklthrough si vous êtes bloqués
-- 🎯 L'objectif est d'apprendre les concepts de sécurité, pas juste d'obtenir le flag
+- ⚠️ These challenges contain **intentional vulnerabilities** for educational purposes
+- 🔐 Do not use the techniques learned on systems without authorization
+- 💡 Read each challenge's README for hints
+- 📖 Consult the walkthroughs if you are stuck
+- 🎯 The objective is to learn security concepts, not just get the flag
 
 ---
 
-## 📞 Ressources supplémentaires
+## 📞 Additional Resources
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [PortSwigger Web Security Academy](https://portswigger.net/web-security)
@@ -496,4 +499,4 @@ docker network inspect ctf_default
 
 ---
 
-**Bonne chance et amusez-vous à explorer! 🎯**
+**Good luck and have fun exploring! 🎯**

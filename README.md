@@ -102,8 +102,6 @@ docker run -it ctf-linux-permissions
 
 **Difficulté:** 🟡 Moyen (2/3)
 
-**Difficulté:** 🟡 Moyen (2/3)
-
 **Description:**
 Ce challenge combine plusieurs vulnérabilités Web: fuites de secrets, path traversal, et manipulation de JWT (JSON Web Tokens). L'application expose accidentellement ses secrets de configuration et les JWT peuvent être forgés.
 
@@ -148,6 +146,70 @@ docker-compose up -d --build
 **Endpoints utiles:**
 - `GET /api/download?file=README.txt` - Télécharger des fichiers
 - `GET /api/admin` - Endpoint protégé (nécessite JWT admin)
+
+---
+
+### CTF-6: API SSRF & Microservices
+
+**Difficulté:** 🟡 Moyen (2/3)
+
+**Description:**
+Ce challenge teste l'exploitation de vulnérabilités SSRF (Server-Side Request Forgery) dans une architecture microservices. Le flag est stocké dans un service interne non exposé directement, accessible uniquement via SSRF.
+
+**Technologies:**
+- Python (Flask)
+- Docker Compose
+- Architecture microservices
+- Docker networking
+
+**Architecture:**
+```
+Gateway (Port 8080)
+  └─> Internal-Flag Service (Port 8001 - non exposé publiquement)
+```
+
+**Concepts testés:**
+- Server-Side Request Forgery (SSRF)
+- Architecture microservices
+- Reconnaissance d'API
+- Contournement de restrictions d'accès
+- Exploitation via requêtes internes
+
+**Lancement:**
+```bash
+cd CTF/CTF-6-api-ssrf
+docker-compose up -d --build
+```
+
+**Accès:**
+- Gateway: `http://localhost:8080`
+- Internal API: `http://localhost:8001` (seulement depuis le conteneur)
+
+**Objectif:**
+Récupérer le flag stocké dans le service interne en exploitant une vulnérabilité SSRF dans la gateway.
+
+**Technique d'exploitation - SSRF:**
+
+L'idée est d'utiliser le service gateway pour faire des requêtes vers le service interne:
+
+```bash
+# Vérifier ce que la gateway expose
+curl http://localhost:8080
+
+# Tenter une SSRF vers le service interne
+curl 'http://localhost:8080/proxy?url=http://internal-flag:8001/flag'
+```
+
+**Points clés:**
+1. Le service interne n'est pas accessible directement depuis votre machine
+2. Le service gateway a accès au réseau interne Docker
+3. Une vulnérabilité SSRF dans la gateway permet de lui faire faire des requêtes
+4. Par défaut, les conteneurs Docker peuvent se résoudre par nom: `internal-flag:8001`
+
+**Outils utiles:**
+- `curl` pour tester les requêtes
+- `docker-compose logs` pour déboguer
+- `docker exec` pour inspecter les conteneurs
 
 ---
 
@@ -295,72 +357,6 @@ Créer un objet sérialisé qui exploite la chaîne de gadgets pour exécuter du
 - `EXPLOIT_GUIDE.md`: Guide détaillé d'exploitation
 - `WALKTHROUGH.md`: Walkthrough complet
 - `SUMMARY.md`: Résumé des concepts
-
----
-
-## 🟡 NIVEAU MOYEN
-
-### CTF-6: API SSRF & Microservices
-
-**Difficulté:** 🟡 Moyen (2/3)
-
-**Description:**
-Ce challenge complexe teste l'exploitation de vulnérabilités SSRF (Server-Side Request Forgery) dans une architecture microservices. Le flag est stocké dans un service interne non exposé directement, accessible uniquement via SSRF.
-
-**Technologies:**
-- Python (Flask)
-- Docker Compose
-- Architecture microservices
-- Docker networking
-
-**Architecture:**
-```
-Gateway (Port 8080)
-  └─> Internal-Flag Service (Port 8001 - non exposé publiquement)
-```
-
-**Concepts testés:**
-- Server-Side Request Forgery (SSRF)
-- Architecture microservices
-- Reconnaissance d'API
-- Contournement de restrictions d'accès
-- Exploitation via requêtes internes
-
-**Lancement:**
-```bash
-cd CTF/CTF-6-api-ssrf
-docker-compose up -d --build
-```
-
-**Accès:**
-- Gateway: `http://localhost:8080`
-- Internal API: `http://localhost:8001` (seulement depuis le conteneur)
-
-**Objectif:**
-Récupérer le flag stocké dans le service interne en exploitant une vulnérabilité SSRF dans la gateway.
-
-**Technique d'exploitation - SSRF:**
-
-L'idée est d'utiliser le service gateway pour faire des requêtes vers le service interne:
-
-```bash
-# Vérifier ce que la gateway expose
-curl http://localhost:8080
-
-# Tenter une SSRF vers le service interne
-curl 'http://localhost:8080/proxy?url=http://internal-flag:8001/flag'
-```
-
-**Points clés:**
-1. Le service interne n'est pas accessible directement depuis votre machine
-2. Le service gateway a accès au réseau interne Docker
-3. Une vulnérabilité SSRF dans la gateway permet de lui faire faire des requêtes
-4. Par défaut, les conteneurs Docker peuvent se résoudre par nom: `internal-flag:8001`
-
-**Outils utiles:**
-- `curl` pour tester les requêtes
-- `docker-compose logs` pour déboguer
-- `docker exec` pour inspecter les conteneurs
 
 ---
 

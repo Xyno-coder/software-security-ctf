@@ -9,7 +9,7 @@ Bienvenue dans ce projet de Capture The Flag (CTF) éducatif ! Ce projet contien
 | 1 | Web SQL Injection | Web Security | 🟢 **Facile** | Web fuzzing et injections SQL |
 | 2 | JWT Leak | Web Security | 🟡 **Moyen** | Fuite de secrets JWT et path traversal |
 | 3 | Linux Permissions | Linux Security | 🟢 **Facile** | Exploitation des permissions Linux |
-| 4 | Linux SUID | Linux Security | � **Hardcore** | PATH hijacking et binaires SUID |
+| 4 | Linux SUID | Linux Security | 🔴 **Hardcore** | PATH hijacking et binaires SUID |
 | 5 | PHP Object Injection | Web Security | 🔴 **Hardcore** | Désérialisation PHP et RCE |
 | 6 | API SSRF | Web Security | 🟡 **Moyen** | Server-Side Request Forgery dans microservices |
 

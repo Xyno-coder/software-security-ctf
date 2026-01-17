@@ -353,11 +353,6 @@ Create a serialized object that exploits the gadget chain to execute code.
 - `classes.php`: Definition of vulnerable classes
 - `shell.php`: Webshell (to create via RCE)
 
-**Additional Documentation:**
-- `EXPLOIT_GUIDE.md`: Detailed exploitation guide
-- `WALKTHROUGH.md`: Complete walkthrough
-- `SUMMARY.md`: Concept summary
-
 ---
 
 ## 🛠️ Requirements
